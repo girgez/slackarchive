@@ -6,12 +6,14 @@ use App\User;
 use App\Channels;
 use App\Messages;
 use App\UserChannel;
+// use Vluzrmos\SlackApi\Facades\SlackConversation;
 
 use SlackApi;
 use SlackChannel;
 use SlackGroup;
 use SlackUser;
 use SlackChat;
+use SlackConversation;
 
 class SlackClient {
 
@@ -42,7 +44,7 @@ class SlackClient {
 	}
 
 	public function updateChannels(){
-		$listchannels = SlackChannel::lists(0);
+		$listchannels = SlackConversation::list(null, false, 1000, 'public_channel,private_channel');
 		$channels = $listchannels->channels;
 
 		foreach ($channels as $channel) {
@@ -56,29 +58,29 @@ class SlackClient {
 			$c->name = $channel->name;
 			$c->channelid = $channel->id;
 			$c->is_archived = $channel->is_archived;
-			$c->is_group = false;
+			$c->is_group = $channel->is_private;
 			$c->save();
 
 		}
 
-		$listgroups = SlackGroup::lists(0);
-		$groups = $listgroups->groups;
+		// $listgroups = SlackGroup::lists(0);
+		// $groups = $listgroups->groups;
 
-		foreach ($groups as $group) {
-			/*echo $group->name."\n";
-			echo $group->id."\n";
-			echo $group->is_archived."\n";
-			echo "\n----\n";*/
+		// foreach ($groups as $group) {
+		// 	/*echo $group->name."\n";
+		// 	echo $group->id."\n";
+		// 	echo $group->is_archived."\n";
+		// 	echo "\n----\n";*/
 
-			//Insert if item does not exist or Update if Item exists.
-			$g = Channels::firstOrNew(['channelid' => $group->id]); //RELACE ON CONFLICT
-			$g->name = $group->name;
-			$g->channelid = $group->id;
-			$g->is_archived = $group->is_archived;
-			$g->is_group = true;
-			$g->save();
+		// 	//Insert if item does not exist or Update if Item exists.
+		// 	$g = Channels::firstOrNew(['channelid' => $group->id]); //RELACE ON CONFLICT
+		// 	$g->name = $group->name;
+		// 	$g->channelid = $group->id;
+		// 	$g->is_archived = $group->is_archived;
+		// 	$g->is_group = true;
+		// 	$g->save();
 
-		}
+		// }
 
 	}
 
@@ -98,7 +100,7 @@ class SlackClient {
 		sleep(1);
 
 		$Channels = new Channels;
-		$channellist = $Channels->where('is_archived', 0)->get();
+		$channellist = $Channels->where('is_archived', false)->get();
 
 		foreach ($channellist as $c) {
 		
@@ -106,11 +108,12 @@ class SlackClient {
 
 			$channel = $c->channelid;
 		
-			if($c->is_group == false){
-				$channelmessages = SlackChannel::history($channel, $limit);
-			}else{
-				$channelmessages = SlackGroup::history($channel, $limit);
-			}
+			$channelmessages = SlackConversation::history($channel, null, false, null, 300);
+			// if($c->is_group == false){
+			// 	$channelmessages = SlackChannel::history($channel, $limit);
+			// }else{
+			// 	$channelmessages = SlackGroup::history($channel, $limit);
+			// }
 			sleep(1);
 
 			//Check channel is empty ?

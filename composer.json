@@ -7,11 +7,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/xnohat/laravel-slack-api"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/xnohat/Elasticquent"
+            "url": "https://github.com/girgez/laravel-slack-api"
         }
     ],
     "minimum-stability": "dev",
@@ -24,7 +20,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
-        "vluzrmos/slack-api": "^0.4.8"
+        "vluzrmos/slack-api": "dev-conversation"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

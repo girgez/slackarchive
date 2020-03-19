@@ -238,6 +238,7 @@ return [
 
         'SlackApi'              => Vluzrmos\SlackApi\Facades\SlackApi::class,
         'SlackChannel'          => Vluzrmos\SlackApi\Facades\SlackChannel::class,
+        'SlackConversation'     => Vluzrmos\SlackApi\Facades\SlackConversation::class,
         'SlackChat'             => Vluzrmos\SlackApi\Facades\SlackChat::class,
         'SlackGroup'            => Vluzrmos\SlackApi\Facades\SlackGroup::class,
         'SlackFile'             => Vluzrmos\SlackApi\Facades\SlackFile::class,
