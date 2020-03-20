@@ -44,7 +44,7 @@ class SlackClient {
 	}
 
 	public function updateChannels(){
-		$listchannels = SlackConversation::list(null, false, 1000, 'public_channel,private_channel');
+		$listchannels = SlackConversation::list('public_channel,private_channel', false, 1000);
 		$channels = $listchannels->channels;
 
 		foreach ($channels as $channel) {
@@ -108,7 +108,7 @@ class SlackClient {
 
 			$channel = $c->channelid;
 		
-			$channelmessages = SlackConversation::history($channel, null, false, null, 300);
+			$channelmessages = SlackConversation::history($channel, false, $limit);
 			// if($c->is_group == false){
 			// 	$channelmessages = SlackChannel::history($channel, $limit);
 			// }else{
