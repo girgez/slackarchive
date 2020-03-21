@@ -17,7 +17,7 @@ class BotCrawl extends Command
      *
      * @var string
      */
-    protected $signature = 'bot:crawl {limit=300}';
+    protected $signature = 'bot:crawl {limit=1000}';
 
     /**
      * The console command description.

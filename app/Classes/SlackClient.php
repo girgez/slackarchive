@@ -114,7 +114,7 @@ class SlackClient {
 			// }else{
 			// 	$channelmessages = SlackGroup::history($channel, $limit);
 			// }
-			sleep(1);
+			sleep(2);
 
 			//Check channel is empty ?
 			if(!isset($channelmessages->messages)) continue;
@@ -136,7 +136,7 @@ class SlackClient {
 				$u = $User->getUserById($message->user);
 				if(!isset($u)){
 					$this->updateUsers();
-					sleep(1);
+					sleep(2);
 				}
 
 				//Insert new message to DB
@@ -170,7 +170,7 @@ class SlackClient {
 
 			}
 
-			sleep(1);
+			sleep(2);
 		}
 		
 	}
