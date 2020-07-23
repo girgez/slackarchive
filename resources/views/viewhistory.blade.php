@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <link href="/static/css/app.css" rel="stylesheet">
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
 
@@ -40,7 +40,7 @@
                 <form id="searchForm" class="search-form" method="GET" action="/searchhistory">
                     <div class="input-group">
                         <input name="query" type="text" size="30" placeholder="Search..." class="search-input"> <span class="icon icon-search"></span> <a href=""><span class="icon icon-remove" style="display: none;"></span></a>
-                        <input name="sid" type="hidden" value="{{ $sessionid }}"
+                        <input name="sid" type="hidden" value="{{ $sessionid }}">
                     </div>
                 </form>
                 <h2 id="sepH2"><span class="filters"><a href="" class="active">Active</a> <a href="" class="">All</a></span> <span>Channels</span> <span style="display: none;">Filter by channel</span></h2>
@@ -71,9 +71,10 @@
                                 @if(isset($message->fileid))
                                 <div class="msg-attachment" style="border-left-color: #E3E4E6">
                                     <p><b>{{ $message->filetitle }}</b></p>
-                                    <p><a href="{{ $message->file_slack_url }}" target="_blank">{{ $message->filename }}</a></p>
                                     @if(strstr('jpg,png,jpeg,gif',$message->filetype) != false)
-                                        <p><img class="attachmentimage" src="{{ $message->file_slack_url }}" alt="{{ $message->filetitle }}" /></p>
+                                        <p><img class="attachmentimage" src="{{ 'https://'.config('slackarchive.full_domain').'/file?sid='.$sessionid.'&url='.urlencode($message->file_slack_url) }}" alt="{{ $message->filetitle }}" /></p>
+                                    @else
+                                        <p><a href="{{ 'https://'.config('slackarchive.full_domain').'/file?sid='.$sessionid.'&url='.urlencode($message->file_slack_url) }}" target="_blank">{{ $message->filename }}</a></p>
                                     @endif
                                 </div>
                                 @endif

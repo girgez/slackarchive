@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3049a30c376f3ac3aca7f3cf404ee3a",
+    "content-hash": "50b436bb34b4a4352aadfc63959e6569",
     "packages": [
         {
             "name": "coderstephen/slack-client",
@@ -3856,12 +3856,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/girgez/laravel-slack-api.git",
-                "reference": "5c8544801e8775c2ee52be9de12b09cb56b00b59"
+                "reference": "55db4ecd0216b5df5b652a71ae75226c98f3ae7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/girgez/laravel-slack-api/zipball/5c8544801e8775c2ee52be9de12b09cb56b00b59",
-                "reference": "5c8544801e8775c2ee52be9de12b09cb56b00b59",
+                "url": "https://api.github.com/repos/girgez/laravel-slack-api/zipball/55db4ecd0216b5df5b652a71ae75226c98f3ae7c",
+                "reference": "55db4ecd0216b5df5b652a71ae75226c98f3ae7c",
                 "shasum": ""
             },
             "require": {
@@ -3897,7 +3897,7 @@
             "support": {
                 "source": "https://github.com/girgez/laravel-slack-api/tree/conversation"
             },
-            "time": "2020-03-19T09:26:47+00:00"
+            "time": "2020-03-20T04:27:58+00:00"
         },
         {
             "name": "zendframework/zend-escaper",

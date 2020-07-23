@@ -147,7 +147,7 @@ class Messages extends Model
                 "from" => ($page > 1) ? ($page-1) * config('slackarchive.num_posts_per_page', 10) : 0,
                 "size" => config('slackarchive.num_posts_per_page', 10),
             ]
-        ])->paginate(config('slackarchive.num_posts_per_page'));
+        ])->paginate(config('slackarchive.num_posts_per_page', 10));
 
 
         //var_dump($searchresults);die();
@@ -166,7 +166,7 @@ class Messages extends Model
         return Cache::tags(['messages_cache'])->remember('app_messages_'.$channelid.'_order_by_ts_page_'.$page, config('slackarchive.query_cache.timeout_short'), function()use($channelid){
                 return Messages::with('sender')->where('channel',$channelid)
                         ->orderBy('ts','asc')
-                        ->paginate(config('slackarchive.num_posts_per_page'));
+                        ->paginate(config('slackarchive.num_posts_per_page', 10));
 
         });
     }

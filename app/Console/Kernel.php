@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('bot:crawl')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('bot:crawl')->everyThirtyMinutes()->withoutOverlapping();
         #$schedule->command('es:reindexallmessages')->hourly();
         $schedule->command('cache:clear')->hourly();
     }

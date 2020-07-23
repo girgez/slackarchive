@@ -9,6 +9,7 @@ use Facades\App\Channels;
 use Facades\App\Messages;
 use Facades\App\User;
 use Facades\App\Classes\SlackClient;
+use GuzzleHttp\Client;
 
 use Illuminate\Http\Request;
 
@@ -64,7 +65,7 @@ class HistoryController extends Controller
                 'text' => '*Click this link to view history:*',
                 'mrkdwn' => true,
                 'attachments' => [
-                    ['color' => '#ff0000','text' => 'http://'.config('slackarchive.full_domain').'/viewhistory?sid='.Session::getId()],
+                    ['color' => '#ff0000','text' => 'https://'.config('slackarchive.full_domain').'/viewhistory?sid='.Session::getId()],
                 ],
             ];
 
@@ -155,5 +156,27 @@ class HistoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function file(Request $request) {
+        if(request()->query('sid') == '' || request()->query('url') == ''){
+            return response('403 Forbidden', 403);
+            die();
+        }
+
+        Session::setId(request()->query('sid'));
+        Session::start();
+
+        $url = request()->query('url');
+
+        /* @var  \GuzzleHttp\Psr7\Response|\GuzzleHttp\Message\Response $response */
+        $client = new Client();
+        $res = $client->request('GET', $url, [
+            'headers' => [
+                'Authorization' => 'Bearer '.config('services.slack.token')
+            ]
+        ]);
+
+        return response($res->getBody(), $res->getStatusCode())->header('Content-Type', $res->getHeader('content-type')[0]);
     }
 }

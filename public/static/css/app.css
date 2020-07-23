@@ -1970,7 +1970,7 @@ hr {
 }
 .pagination {
  display:-ms-flexbox;
- display:flex;
+ /* display:flex; */
  padding-left:0;
  list-style:none;
  border-radius:.25rem

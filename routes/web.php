@@ -22,5 +22,6 @@ Route::get('/slack','SlackController@slack');
 
 Route::post('/viewhistory', 'HistoryController@setviewingchannel');
 Route::get('/viewhistory', 'HistoryController@show');
+Route::get('/file', 'HistoryController@file');
 
 Route::get('/searchhistory', 'HistoryController@search');
